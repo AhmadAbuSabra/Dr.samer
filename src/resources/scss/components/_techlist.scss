@@ -1,0 +1,35 @@
+@keyframes featuresTechList {
+  0% {transform: translateY(0)}
+  50% {z-index: 1000; transform: translateY(10px) scaleY(1.4) scaleX(1.4);}
+  100% {z-index: 1000; transform: translateY(-10px) scaleY(1.2) scaleX(1.2);}
+}
+
+.features-tech-list {
+
+  & > div {
+    background-color: $body-bg;
+    border-radius: 7px;
+    font-size: 1.1rem;
+
+    &:hover {
+      background-color: $white;
+      box-shadow: $box-shadow-sm;
+      z-index: 5;
+    }
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@include media-lg {
+  .features-tech-list {
+    & > div:hover {
+      animation-name: featuresTechList;
+      animation-duration: 300ms;
+      animation-fill-mode: forwards;
+    }
+  }
+}

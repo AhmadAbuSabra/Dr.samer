@@ -1,0 +1,29 @@
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+
+    img {
+      height: 50px;
+      width: 80px;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+
+    a {
+      line-height: 16px;
+    }
+  }
+
+  li:last-child {
+    border: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}

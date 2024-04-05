@@ -1,0 +1,917 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
+<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
+<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<bean:define id="language">
+ar
+</bean:define>
+<link rel="stylesheet" href="/externalResources/css/bootstrap-${language}.css" type="text/css"/>
+<link rel="stylesheet" href="/externalResources/css/font-awesome.min.css" type="text/css"/>
+<link rel="stylesheet" href="/externalResources/css/style-${language}.css" type="text/css"/>
+<script type="text/javascript" src="/externalResources/js/jquery-1.11.2.min.js"></script>
+
+
+<script type="text/javascript" src="/externalResources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/externalResources/js/jquery-migrate-1.0.0.min.js"></script>    
+<script src="<html:rewrite page="/script/id.js"/>"></script>    
+
+<link rel="stylesheet" href="/phase2/styles/id-${language}.css?v=1.1" type="text/css"/>
+
+<script>
+var idVar,gisVar,emiratesIdVal,trxNoSelectedVar,cityCodeSelectedVar,subUrbSelectedVar,areaCodeSelectedVar,govNoSelectedVar,trxNoVar,cityCodeVar,subUrbVar,areaCodeVar,govNoVar,ownerName,cityName,subUrbName,areaName,mobileNumber ;
+var  cityNameSelected,suburbNameArSelected,areaNameArSelected,grantedGovNumSelected ;
+// Global variables to keep track of current page and rows per page
+var currentPage = 1;
+var rowsPerPage = 7;
+var filteredData = [];
+var ownerHistoryData = [];
+
+
+ function handleChange(value) {
+    console.log("Value changed to:", value);
+     
+      $("input[name='selectedRow']:checked").prop('checked', false);
+
+  // Remove background color or any other visual indication
+  $("tr.selected").removeClass("selected");
+  }
+  
+ function goHome()
+ {
+ 
+ location.reload(true);
+
+ }
+function onSubmit()
+{
+console.log(' onSubmit ');
+    mobileNumber='0528475928';
+     emiratesIdVal = getParameterByName('emiratesIdVal');
+       	$.ajax({
+	    		url:'<html:rewrite action="/submitReplacement.do"/>',
+	    		data:{'trxNoVar':trxNoVar,'trxNoSelectedVar':trxNoSelectedVar,'emiratesIdVal':emiratesIdVal,'mobileNumber':mobileNumber},
+	    		success:function(data) {
+                        console.log(' data '+data);
+                        console.log(data);
+	    			
+	    			
+
+	    		}		    		
+	    	}); 
+                $("#ExistTransactionConfirm").hide();
+                $("#final").show();   
+               
+                console.log(emiratesIdVal +'  '+trxNoVar);
+                console.log(trxNoSelectedVar);
+                console.log(mobileNumber);
+
+}
+function continueReplaceNew()
+{
+      trxNoSelectedVar= $("#trxNoSelected").val();
+      
+      
+      console.log(trxNoVar);
+      console.log(trxNoSelectedVar);
+      if(trxNoSelectedVar.trim() == "")
+      {
+      
+      $("#ExistTransactionValidation").show();
+      
+      
+      }
+      
+      else
+ {     
+      
+     $("#ExistTransactionForm").hide();
+      $("#ExistTransactionValidation").hide();
+
+      $("#ExistTransactionConfirm").show();
+    // $("#innerDataConfirm").prepend("<label><bean:message key='lblTrxNo'/></label> : <label class='trxNo'>  "+trxNoVar+"  </label></br><label><bean:message key='OwnerName'/> : </label><label>  "+ownerName+"  </label></br><label><bean:message key='lblArea'/> : </label><label class='lblArea'>  "+ownerHistoryData[x].areaNameAr+"  </label></br><label ><bean:message key='lblSuburb'/> : </label><label>  "+ownerHistoryData[x].suburbNameAr+"  </label></br><label ><bean:message key='govNum'/></label> :  <label>  "+ownerHistoryData[x].grantedGovNum+"</label>  ");
+
+      $("#innerDataConfirm").empty().prepend("<label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='ownerNameLand'/> : </label><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'>  "+ownerName+"  </label></br><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='lblTrxNo'/></label> : <label style='font-weight: bold; margin-right: 10px; font-size: 16px;' class='trxNo'>  "+trxNoVar+"  </label style='font-weight: bold; margin-right: 10px; font-size: 16px;'></br><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='cityName'/> : </label><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'>  "+cityName+"  </label></br><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='lblArea'/> : </label><label style='font-weight: bold; margin-right: 10px; font-size: 16px;' class='lblArea'>  "+areaName+"  </label></br><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='lblSuburb'/> : </label><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'>  "+subUrbName+"  </label></br><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='govNum'/></label> :  <label style='font-weight: bold; margin-right: 10px; font-size: 16px;'>  "+govNoVar+"</label>  ");
+
+      $("#innerDataConfirm2").empty().prepend("<label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='suggestedland'/></label></br><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='lblTrxNo'/></label> : <label style='font-weight: bold; margin-right: 10px; font-size: 16px;' class='trxNo'>  "+trxNoSelectedVar+"  </label><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='cityName'/> : </label><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'>  "+cityNameSelected+"  </label></br><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='lblArea'/> : </label><label style='font-weight: bold; margin-right: 10px; font-size: 16px;' class='lblArea'>  "+areaNameArSelected+"  </label></br><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='lblSuburb'/> : </label><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'>  "+suburbNameArSelected+"  </label></br><label style='font-weight: bold; margin-right: 10px; font-size: 16px;'><bean:message key='govNum'/></label> :  <label style='font-weight: bold; margin-right: 10px; font-size: 16px;'>  "+grantedGovNumSelected +"</label>  ");
+
+//       	$.ajax({
+//	    		url:'<html:rewrite action="/getReplaceLand.do"/>',
+//	    		data:{'trxNoVar':trxNoVar,'trxNoSelectedVar':trxNoSelectedVar,'cityCodeVar':cityCodeVar,'subUrbVar':subUrbVar,'areaCodeVar':areaCodeVar,'govNoVar':govNoVar},
+//	    		success:function(data) {
+//                        console.log(' data '+data);
+//                        console.log(data);
+//	    			
+//	    			
+//
+//	    		}		    		
+//	    	}); 
+      
+      
+}
+}
+
+function onkeyupTest()
+{
+console.log(' onkeyupTest ');
+
+}
+
+function updateTable() {
+  var tableBody = $("#ownerHistoryTable tbody");
+  tableBody.empty(); // Clear existing rows
+
+  // Calculate the starting index
+  var start = (currentPage - 1) * rowsPerPage;
+  var end = start + rowsPerPage;
+
+  // Loop through a subset of the ownerHistoryData array
+  console.log(' updateTable ownerHistoryData.length '+ ownerHistoryData.length)
+    console.log('Starting index:', start, 'Ending index:', end);
+
+  // Loop through a subset of the filteredData array
+  console.log('Filtered Data Length:', filteredData.length);
+  for (var i = start; i < end; i++) {
+  //  var item = ownerHistoryData[i];
+   var item = filteredData[i];
+   
+    if (item) {
+    console.log(item);
+      var row = "<tr>";
+      row += "<td>" + item.trxNo + "</td>";
+      row += "<td>" + item.cityNameAr + "</td>";
+      row += "<td>" + item.areaNameAr + "</td>";
+      row += "<td>" + item.suburbNameAr + "</td>";
+      row += "<td>" + item.grantedGovNum + "</td>";
+   ////////////////
+   row += "<td id='linkPlaceholder'></td>";  // Placeholder for the link
+
+  row += `<td><input type='radio' name='selectedRow' value='${i}' onclick='handleSelectedRow(this)'></td>`;
+      row += "</tr>";
+
+  var newRow = $(row);  // Convert the string to a jQuery object
+
+
+  var mapLink = $('<a>').attr({
+      href: '#',
+       'data-area-code': item.areaCode,  // Store areaCode as a data attribute
+      'data-gov-num': item.grantedGovNum,
+      target: '_blank'
+  }).html('<img src="../phase2/images/google-maps.png" alt="map icon" style="width:16px;height:16px;">');
+
+  mapLink.click(function(event) {
+    event.preventDefault();
+    
+    // Define your parameters
+   
+      var AREA_CODE_P = $(this).data('area-code');
+      var GOV_NUM_P = $(this).data('gov-num');
+    var token = '1028ed0411ada0612dd4313756dbbf51aa227ad8';
+    
+    // Build your URL
+    var url = 'http://192.168.13.54:8080/fmedatastreaming/eservice/FindYourLandMobileApp.fmw?P_AREA_CODE='+AREA_CODE_P+'&p_gov_num='+GOV_NUM_P+'&token='+token;
+    
+    // Perform the AJAX call
+    $.ajax({
+      url: url,
+      type: 'GET',
+      success: function(data, status, xhr) {
+        console.log('Received data:', data);
+        
+        if (typeof data === "string" && data.startsWith('http')) {
+          window.open(data, '_blank');
+        } else {
+          console.log("The received data is not a valid URL");
+           console.log("AREA_CODE_P " + AREA_CODE_P);
+            console.log("GOV_NUM_P "+GOV_NUM_P);
+        }
+      },
+      error: function(xhr, status, error) {
+        console.log('Error: ' + error);
+      }
+    });
+  });
+
+  newRow.find('#linkPlaceholder').append(mapLink);  // Add the mapLink to the placeholder in newRow
+  tableBody.append(newRow); 
+   ///////////////
+
+    
+    //  tableBody.append(row);
+    }
+  }
+}
+
+function applyFilter() {
+// console.log('Applying filter...');
+//  
+//  var filterTrxNoValue = $("#filterlblTrxNo").val();
+//  var filtercityNameValue= $("#filtercityName").val();
+//  var filterlblAreaValue= $("#filterlblArea").val();
+//  var filterlblSuburbValue= $("#filterlblSuburb").val();
+//  var filtergovNumValue= $("#filtergovNum").val();
+//  
+//  
+//  
+//  console.log(' filterValue filterValue '+filterTrxNoValue)
+//console.log(' filterValue filtercityNameValue '+filtercityNameValue)
+//  // If filter is empty, reset to the full data set
+//  if (filterTrxNoValue === "" && filtercityNameValue ==="") {
+//    filteredData = ownerHistoryData;
+//  } else {
+//    // Otherwise, filter the data
+//filteredData = ownerHistoryData.filter(function(item) {
+//      var isMatch = true;
+//
+//      if (filterTrxNoValue !== "") {
+//        isMatch = isMatch && item.trxNo.toString().includes(filterTrxNoValue);
+//      }
+//
+//      if (filterCityNameValue !== "") {
+//        isMatch = isMatch && item.cityNameAr.toLowerCase().includes(filterCityNameValue.toLowerCase());
+//      }
+//
+//      return isMatch;
+//    });
+//  }
+//  console.log(' filteredData filteredData ==='+filteredData.lenght)
+//  updateTable();
+  var filterTrxNoValue = $("#filterlblTrxNo").val();
+  var filterCityNameValue = $("#filtercityName").val();
+  var filterlblAreaValue= $("#filterlblArea").val();
+  var filterlblSuburbValue= $("#filterlblSuburb").val();
+  var filtergovNumValue= $("#filtergovNum").val();
+  
+  
+  console.log(' filterTrxNoValue ==== '+filterTrxNoValue);
+  console.log(' filterCityNameValue ==== '+filterCityNameValue);
+  filteredData = ownerHistoryData;
+  
+
+
+  // Filter by TrxNo if the filter value is not empty
+  if (filterTrxNoValue !== "") {
+    filteredData = filteredData.filter(function(item) {
+      return item.trxNo.toString().includes(filterTrxNoValue);
+    });
+  }
+  
+  // Filter by cityName if the filter value is not empty
+  if (filterCityNameValue !== "") {
+    filteredData = filteredData.filter(function(item) {
+    if (item && item.cityNameAr) {
+      return item.cityNameAr.toString().toLowerCase().includes(filterCityNameValue.toLowerCase());
+    }
+    });           
+  }
+  
+   if (filterlblAreaValue !== "") {
+    filteredData = filteredData.filter(function(item) {
+    if (item && item.areaNameAr) {
+      return item.areaNameAr.toString().toLowerCase().includes(filterlblAreaValue.toLowerCase());
+    }
+    });           
+  }
+  
+    if (filterlblSuburbValue !== "") {
+    filteredData = filteredData.filter(function(item) {
+    if (item && item.suburbNameAr) {
+      return item.suburbNameAr.toString().toLowerCase().includes(filterlblSuburbValue.toLowerCase());
+    }
+    });           
+  }
+  
+    if (filtergovNumValue !== "") {
+    filteredData = filteredData.filter(function(item) {
+    if (item && item.grantedGovNum) {
+      return item.grantedGovNum.toString().toLowerCase().includes(filtergovNumValue.toLowerCase());
+    }
+    });           
+  }
+  
+    console.log('filteredData ahmad'+filteredData.length)
+  // Refresh the table with filtered data
+  updateTable();
+}
+
+$("#filterlblTrxNo, #filtercityName, #filterlblArea, #filterlblSuburb, #filtergovNum").on("input", function() {
+console.log('  filter filter ');
+  currentPage = 1; // Reset to first page
+  applyFilter();
+});
+
+function handleSelectedRow(event) {
+    var selectedRow = $(event).closest('tr'); // Get the closest tr parent element
+    var trxNo = selectedRow.find('td:eq(0)').text(); // Get the first field (trxNo)
+    var cityNameAr = selectedRow.find('td:eq(1)').text(); // Get the second field (cityNameAr)
+     var suburbNameAr = selectedRow.find('td:eq(2)').text(); // Get the second field (suburbNameAr)
+      var areaNameAr = selectedRow.find('td:eq(3)').text(); // Get the second field (areaNameAr)
+       var grantedGovNum = selectedRow.find('td:eq(4)').text(); // Get the second field (grantedGovNum)
+    
+    console.log("Selected row:");
+    console.log("trxNo: " + trxNo);
+    console.log("cityNameAr: " + cityNameAr);
+    
+       $("#trxNoSelected").val(trxNo);
+       trxNoSelectedVar = trxNo;
+       cityNameSelected = cityNameAr;
+       suburbNameArSelected = suburbNameAr;
+       areaNameArSelected = areaNameAr;
+       grantedGovNumSelected = grantedGovNum;
+
+    // Do whatever you need to do with these
+}
+
+// Handler for 'Previous' button
+function handlePrevPage() {
+  console.log("prev clicked");
+
+  if (currentPage > 1) {
+    currentPage--;
+    updateTable();
+  }
+};
+
+// Handler for 'Next' button
+function handleNextPage() {
+  console.log("Next clicked");
+
+  var totalPages = Math.ceil(ownerHistoryData.length / rowsPerPage);
+  if (currentPage < totalPages) {
+    currentPage++;
+    updateTable();
+  }
+};
+          function continueReplace()
+          {
+          
+          console.log(' continueReplace ');
+           $("#ExistTransactionForm").show();
+          $("#innerID").hide();
+         $(".messageContin").hide();
+          
+           
+           console.log(' trxNoVar ==== '+trxNoVar );
+          
+             	$.ajax({
+	    		url:'<html:rewrite action="/getAllGrantedMapList.do"/>',
+	    		data:{'trxNoVar':trxNoVar},
+	    	 success: function (data) {
+      ownerHistoryData = data.ownerHistoryData;
+      currentPage = 1; // Reset to first page
+      console.log("Received ownerHistoryData continueReplace length:", ownerHistoryData.length);
+      applyFilter();
+  //    updateTable();
+    }		    		
+	    	});   
+         
+          }
+              
+          function showExistTransaction ()
+          {
+        
+          $("#ExistTransaction").show();
+          $("#showDataMenu").hide();
+         //  var emiratesIdVal = $("#idNumber").val();
+           console.log(' emiratesIdVal ==== '+emiratesIdVal );
+          
+             	$.ajax({
+	    		url:'<html:rewrite action="/getGrantedMapList.do"/>',
+	    		data:{'emiratesIdVal':emiratesIdVal},
+	    		success:function(data) {
+                        console.log(' data '+data);
+                        console.log(data);
+                          var  ownerHistoryDataUser = data.ownerHistoryData;
+      currentPage = 1; // Reset to first page
+    //  applyFilter(); // Call it here after populating ownerHistoryData
+     // updateTable();
+	    			// ownerHistoryData=data.ownerHistoryData;
+                             //   console.log("Received ownerHistoryData showExistTransaction length:", ownerHistoryData.length);
+
+	    			for (x=0;x<ownerHistoryDataUser.length;x++) {
+                                                            // innerDataButton
+	    			$("#innerID").prepend("<label><bean:message key='lblTrxNo'/></label> : <label class='trxNo'>  "+ownerHistoryDataUser[x].trxNo+"  </label></br><label><bean:message key='cityName'/> : </label><label>  "+ownerHistoryDataUser[x].cityNameAr+"  </label></br><label><bean:message key='lblArea'/> : </label><label class='lblArea'>  "+ownerHistoryDataUser[x].areaNameAr+"  </label></br><label ><bean:message key='lblSuburb'/> : </label><label>  "+ownerHistoryDataUser[x].suburbNameAr+"  </label></br><label ><bean:message key='govNum'/></label> :  <label>  "+ownerHistoryDataUser[x].grantedGovNum+"</label>  ");
+                                trxNoVar=ownerHistoryDataUser[x].trxNo;
+                                cityCodeVar = ownerHistoryDataUser[x].cityCode;
+                                subUrbVar = ownerHistoryDataUser[x].subUrb;
+                                areaCodeVar = ownerHistoryDataUser[x].areaCode;
+                                govNoVar = ownerHistoryDataUser[x].grantedGovNum;
+                                ownerName= ownerHistoryDataUser[x].ownerName;
+                                cityName = ownerHistoryDataUser[x].cityNameAr;
+                                subUrbName = ownerHistoryDataUser[x].suburbNameAr;
+                                areaName = ownerHistoryDataUser[x].areaNameAr;
+                                mobileNumber = ownerHistoryDataUser[x].mobileNumber;
+                                
+                                console.log('ahmad abu');
+                                console.log('trxNoVar ==== '+trxNoVar);
+                                console.log('mobileNumber ==== '+mobileNumber);
+        
+	    			}
+
+	    		}		    		
+	    	});   
+          
+          }
+          
+          function showEdit(){
+          
+		var trxNoVal = $(".trxNo").text();
+                trxNoVal =trxNoVal.replace(" : ","");
+		var mobileVal = $("#mobileNo").val();
+                trxNoVal =trxNoVal.replace(" : ","")         
+		var emailVal = $("#email").val();
+                      
+          console.log(' emiratesIdVal === '+emiratesIdVal);
+                    console.log(' mobileVal === '+mobileVal);
+          console.log(' emailVal === '+emailVal);
+
+if($("#edit").hasClass('edit')){
+console.log(' edit ');
+$("#edit").text("<bean:message key='save'/>");
+$("#edit").removeClass("edit");
+$("#edit").addClass("save");
+$('#mobileNo').prop('readonly',false);
+$('#mobileNo').css("background-color", "#fff");
+$('#email').prop('readonly',false);
+$('#email').css("background-color", "#fff");
+
+}else if($("#edit").hasClass('save')){
+$('#continue').attr('disabled', 'disabled');
+$("#edit").text("<bean:message key='edit'/>");
+$("#edit").removeClass("save");
+$("#edit").addClass("edit");
+$('#mobileNo').prop('readonly',true);
+$('#mobileNo').css("background-color", "rgba(0, 0, 0, 0)");
+$('#email').prop('readonly',true);
+$('#email').css("background-color", "rgba(0, 0, 0, 0)");
+	    	$.ajax({
+	    		url:'<html:rewrite action="/contactDetailsUpdate.do"/>',
+	    		data:{'trxNoVal':trxNoVal,'mobileVal':mobileVal,'emailVal':emailVal},
+	    		success:function(data) {
+	    			contactreturnData=data.updateContactDetail;
+                                $('#continue').removeAttr("disabled");
+	    		}		    		
+	    	});    
+
+}
+
+
+          }
+          
+          function showGis(){     
+          
+          $(".messageContin").hide();
+          
+		var trxNoVal = '';
+                trxNoVal =trxNoVal.replace(" : ","");
+		var ownerVal = '';
+		var mobileVal = '';
+           //  emiratesIdVal = getParameterByName('emiratesIdVal');  
+             var emiratesIdVal = $("#idNumber").val();
+                console.log('emiratesIdVal === '+emiratesIdVal);
+             
+                	$.ajax({
+	    		url:'<html:rewrite action="/getGrantedMapList.do"/>',
+	    		data:{'emiratesIdVal':emiratesIdVal},
+	    		success:function(data) {
+                        console.log(' data '+data);
+                        console.log(data);
+	    			ownerHistoryData=data.ownerHistoryData;
+	    			console.log(ownerHistoryData)
+                                trxNoVal= ownerHistoryData[0].trxNo;
+                                ownerVal= ownerHistoryData[0].ownerName;
+                                mobileVal= ownerHistoryData[0].mobileNumber;
+       //         window.location.href = 'https://www.sdtps.gov.ae/Html5Viewer/index.html?viewer=Land_Replacment.InstanseGrantViewer&GrantedID='+trxNoVal+'&Owner='+ownerVal+'&MobileNo='+mobileVal+'&ClientId='+emiratesIdVal;
+               console.log(' trxNoVal === '+trxNoVal);
+///////
+    ownerVal =ownerVal.replace(" : ","");                
+            
+				var link="https://www.sdtps.gov.ae/Html5Viewer/index.html?viewer=Land_Replacment.InstanseGrantViewer&GrantedID="
+				
+            var el = document.getElementById('gisAllocaFrame');
+            el.src = link+trxNoVal+'&Owner='+ownerVal+'&MobileNo='+mobileVal+'&ClientId='+emiratesIdVal;
+                            console.log('Executed! el.src   '+el.src); 
+
+            $("#showDataMenu").hide(1000);
+            $("#showGis").show(1000);
+              gisVar = setInterval(function () { 
+              
+                    var iframe = document.getElementById('gisAllocaFrame');
+               var iframeContent = iframe.contentWindow || iframe.contentDocument
+               if (iframeContent.document) {
+  iframeContent = iframeContent.document;
+}
+
+console.log(iframeContent.body.innerHTML);
+
+              el = document.getElementById('gisAllocaFrame').contentWindow.location.href;
+              
+              var specificDiv = document.querySelector('.view.View-63G5HTKZ.active');
+
+if (specificDiv) {
+  console.log('The specific div exists.');
+   $("#showGis").hide(1000);
+                $("#loadingGis").show(1000); 
+
+} else {
+  console.log('The specific div does not exist.');
+}
+        
+              
+              if(el.includes("Html5Viewer")){
+                console.log('Executed! includes link Html5Viewer   '+el); 
+              }else{
+                console.log('Executed! not include link Html5Viewer   '+el); 
+                $("#showGis").hide(1000);
+                $("#loadingGis").show(1000); 
+//                               	    	$.ajax({
+//	    		url:'<html:rewrite action="/landAllocationGisData.do"/>',
+//	    		data:{'trxNoVal':trxNoVal},
+//	    		success:function(data) {
+//	    			fpUrlData=data.fpUrlData;
+//	    			for (x=0;x<fpUrlData.length;x++) {
+//                                    console.log(fpUrlData[x].fpUrl);
+//	    			}
+//	    		}		    		
+//	    	});             
+              			clearInterval(gisVar);  
+             
+              }
+                        }, 3000);
+
+//////
+
+
+	    		}		    		
+	    	});  
+		
+          }
+          
+        function backGisM()
+        {
+        
+         $(".messageContin").show();
+         
+          $("#showGis").hide();
+        
+        }
+        function backInnerReplaceM()
+        {
+         $(".messageContin").show();
+         $("#innerID").show();
+         $("#ExistTransactionForm").hide();
+        
+        }
+       function backInnerReplaceConfM()
+       {
+        $("#ExistTransactionConfirm").hide();
+        $("#ExistTransactionForm").show();
+       
+       }
+       
+          
+          function confirmData(){
+		emiratesIdVal = $("#idNumber").val();
+                if (emiratesIdVal.length==15){
+			clearInterval(idVar);   
+                }else{
+                console.log('Executed! without id');                
+                }
+          }    
+          
+          function getParameterByName(name) {
+          console.log(' name '+name);
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+ $( document ).ready(function() {
+     // Initialize table and filters
+     var userDataCount='0';
+  emiratesIdVal = getParameterByName('emiratesIdVal');  
+  console.log('emiratesIdVal === '+emiratesIdVal);
+applyFilter();
+
+          $("#ExistTransaction").hide();
+          $("#ZFComponent").hide();
+           $("#showDataMenu").hide();
+           $("#ExistTransactionForm").hide();
+         $("#ExistTransactionConfirm").hide();  
+        $("#final").hide();   
+        $("#userCheck").hide();
+         $("#userCheckID").hide();
+         $("#ExistTransactionValidation").hide();
+         $("#messageContin").hide();
+         
+
+          $("body").css("background-color","#F3EFEC");
+          $("#idNumber").id();    
+          $("#idLogo").click(function(){$(".ajax-loader").show();});
+          $(".intro").click(function(){
+          
+          
+          ///////////////////////////////
+             console.log(' emiratesIdVal ==== '+emiratesIdVal );
+          
+             	$.ajax({
+	    		url:'<html:rewrite action="/getGrantedMapList.do"/>',
+	    		data:{'emiratesIdVal':emiratesIdVal},
+	    		success:function(data) {
+                        console.log(' data '+data);
+                        console.log(data);
+                           ownerHistoryData = data.ownerHistoryData;
+      currentPage = 1; // Reset to first page
+   //   applyFilter(); // Call it here after populating ownerHistoryData
+    //  updateTable();
+	    			// ownerHistoryData=data.ownerHistoryData;
+                                console.log("Received ownerHistoryData showExistTransaction length:", ownerHistoryData.length);
+                                
+                                if(ownerHistoryData.length == 0)
+                                {
+                                  $(".intro").hide(1000);$("#userCheckID").show(1000);   
+            $("#doneEID").prepend(" <label class='trxNo'>  "+emiratesIdVal+"  </label></br> ");
+              console.log(' ready userCheckID show');
+                                
+                                }
+
+	    			for (x=0;x<ownerHistoryData.length;x++) {
+                                                            // innerDataButton
+	    			$("#innerDataButtonForm").prepend("<label style='font-size: large;display: inline-block; width: calc(50% - 20px); text-align: left; margin: 5px; '><bean:message key='lblTrxNo'/></label> : <label style='font-size: large;display: inline-block; width: calc(50% - 20px); text-align: right; margin: 5px'>  "+ownerHistoryData[x].trxNo+"  </label></br><label style='font-size: large;display: inline-block; width: calc(50% - 20px); text-align: left; margin: 5px; '><bean:message key='cityName'/> : </label><label style='font-size: large;display: inline-block; width: calc(50% - 20px); text-align: right; margin: 5px; '>  "+ownerHistoryData[x].cityNameAr+"  </label></br><label style='font-size: large;display: inline-block; width: calc(50% - 20px); text-align: left; margin: 5px; '><bean:message key='lblArea'/> : </label><label style='font-size: large;display: inline-block; width: calc(50% - 20px); text-align: right; margin: 5px; ' class='lblArea'>  "+ownerHistoryData[x].areaNameAr+"  </label></br><label style='font-size: large;display: inline-block; width: calc(50% - 20px); text-align: left; margin: 5px; '><bean:message key='lblSuburb'/> : </label><label style='font-size: large;display: inline-block; width: calc(50% - 20px); text-align: right; margin: 5px; '>  "+ownerHistoryData[x].suburbNameAr+"  </label></br><label style='font-size: large;display: inline-block; width: calc(50% - 20px); text-align: left; margin: 5px; '><bean:message key='govNum'/></label> :  <label style='font-size: large;display: inline-block; width: calc(50% - 20px); text-align: right; margin: 5px; '>  "+ownerHistoryData[x].grantedGovNum+"</label>  ");
+                                trxNoVar=ownerHistoryData[x].trxNo;
+                                cityCodeVar = ownerHistoryData[x].cityCode;
+                                subUrbVar = ownerHistoryData[x].subUrb;
+                                areaCodeVar = ownerHistoryData[x].areaCode;
+                                govNoVar = ownerHistoryData[x].grantedGovNum;
+                                ownerName= ownerHistoryData[x].ownerName;
+                                cityName = ownerHistoryData[x].cityNameAr;
+                                subUrbName = ownerHistoryData[x].suburbNameAr;
+                                areaName = ownerHistoryData[x].areaNameAr;
+                                mobileNumber = ownerHistoryData[x].mobileNumber;
+                                
+                                console.log('ahmad abu');
+                                console.log('trxNoVar ==== '+trxNoVar);
+                                console.log('mobileNumber ==== '+mobileNumber);
+                                
+                                console.log('trxNoVar ==== '+trxNoVar);
+                                $.ajax({
+	    		url:'<html:rewrite action="/checkUserTrx.do"/>',
+	    		data:{'trxNoVar':trxNoVar},
+	    		success:function(data) {
+                        console.log(' data '+data);
+                        console.log(data);
+                       console.log(data.userMapData[0].count); 
+                       userDataCount= data.userMapData[0].count.toString();
+                       
+                         console.log(userDataCount == '1');
+                if(userDataCount == '1')
+              { 
+              $(".intro").hide(1000);$("#userCheck").show(1000);   
+            $("#doneTrxNo").prepend("<label><bean:message key='lblTrxNo'/></label> : <label class='trxNo'>  "+trxNoVar+"  </label></br> ");
+              console.log(' ready userCheck show');
+              }
+                else {
+               $(".intro").hide(1000);$(".emiratesPage").show(1000); console.log(' ready EmiratesIdPage show'); }
+	    				
+	    		}		    		
+	    	}); 
+              
+        
+	    			}
+
+	    		}		    		
+	    	});  
+                
+                	
+          //////////////////////////////
+          idVar = setInterval(function () { 
+          confirmData(); 
+          if (emiratesIdVal.length==15){
+          $(".ajax-loader").show();
+            $(".messageContin").hide(1000);
+          //  $("#showData").show(1000);
+          showExistTransaction();
+           
+	    	$.ajax({
+	    		url:'<html:rewrite action="/getOwnerHistoryData.do"/>',
+	    		data:{'emiratesIdVal':emiratesIdVal},
+	    		success:function(data) {
+	    			ownerHistoryData=data.ownerHistoryData;
+                                console.log(ownerHistoryData)
+	    			for (x=0;x<ownerHistoryData.length;x++) {
+                                                         
+                                if(ownerHistoryData[x].landUsageDescEn=="Residential" && ( ownerHistoryData[x].trxStatusEn == "Under review for the application" || ownerHistoryData[x].trxStatusEn == "Under Study")){
+	    			$("#innerDataButtonForm").prepend("<label><bean:message key='lblTrxNo'/></label><label class='trxNo'> : "+ownerHistoryData[x].trxNo+"</label></br><label><bean:message key='trxType'/></label><label> : <bean:message key='IssuingGrantedMap'/></label></br><label><bean:message key='name'/></label><label class='ownerName'> : "+ownerHistoryData[x].beneficiaryName+"</label></br><label ><bean:message key='lblMobileNo'/></label><label> : </label>"
+                                +"<input id='mobileNo' class='mobileNo' type='text' value="+ownerHistoryData[x].mobileNum+"  readonly='true'></br><label><bean:message key='representativeEmailId'/></label><label> : </label><input id='email' readonly='true' type='email' value='"+ownerHistoryData[x].email+"'  >");
+                                }
+	    			}
+
+	    		}		    		
+	    	});            
+          }
+          }, 3000);
+          });                  
+ });
+</script>
+<html:form action="/landReplacmentForm" styleId="landReplacmentForm">	
+
+    <div class="col-md-12 col-xs-12 intro" ></div>
+    
+       <div class="col-md-12 col-xs-12 emiratesPage" >
+            <div id="innerID" >
+                    <label for="idNumber" ><bean:message key="identityNoInsert"/><span class="required">*</span></label></br>
+                    <html:text property="ownerId" styleId="idNumber" styleClass="alphanumericemidpasspt" maxlength="50" value="" onchange="validateEmiratesId();" style="width:124px;"/></br>
+                    <html:img styleId="idLogo" page="/images/scan-card-ins.png" titleKey ="readCard" onclick="confirmData();doReadPublicDataGrantedMap();" />
+                    <html:img page="/images/ajax-loader-small.gif" style="display:none;" styleClass="ajax-loader"/>             
+                    
+            </div>
+    </div>	
+    
+    <div class="col-md-12 col-xs-12 messageContin" >
+            <div id="innerID" >
+        
+                <div id="innerDataButton" >
+                 <div id="innerDataButtonForm">
+                </div>
+
+                    </br>
+                    <div class="sectionForR">
+                     
+                    <!--<a href="#" id="save" class="button1 bouncy" ><bean:message key="save"/></a>-->
+                    <a href="#" id="edit" class="button1  edit centered-button" style="animation-delay:0.7s;width: 700px;" onclick="continueReplace();"></a>
+                    </br>
+                    </br>
+                    <a href="#" id="continue" class="button1  centered-button" style="animation-delay:0.14s;width: 700px;" onclick="showGis();"></a>
+                    </div>
+                    
+            </div>
+          
+                      
+            </div>
+    </div>	
+    
+      <div class="col-md-12 col-xs-12" id="userCheckID" >
+        
+            <div class="col-md-12 col-xs-12" id="showData" >
+            <div id="innerDataButton" >
+        <label  ><bean:message key="landReplacementDoneEID"/></label></br>
+        <div id="doneEID"></div>
+
+            </br>
+
+            <a href="#" id="finalButton" class="button1 bouncy centered-button" style="animation-delay:0.14s" onclick="goHome();"><bean:message key="mainPage"/></a>
+
+          </div>
+          </div>
+           
+            
+    </div>
+    
+           <div class="col-md-12 col-xs-12" id="userCheck" >
+        
+            <div class="col-md-12 col-xs-12" id="showData" >
+            <div id="innerDataButton" >
+        <label  ><bean:message key="landReplacementDone"/></label></br>
+        <div id="doneTrxNo"></div>
+
+            </br>
+
+            <a href="#" id="finalButton" class="button1 bouncy centered-button" style="animation-delay:0.14s" onclick="goHome();"><bean:message key="mainPage"/></a>
+
+          </div>
+          </div>
+           
+            
+    </div>
+           <div class="col-md-12 col-xs-12" id="final" >
+        
+            <div class="col-md-12 col-xs-12" id="showData" >
+            <div id="innerDataButton" >
+        <label  ><bean:message key="replacementsuccess"/></label></br>
+
+            </br>
+
+            <a href="#" id="finalButton" class="button1 bouncy centered-button" style="animation-delay:0.14s" onclick="goHome();"><bean:message key="mainPage"/></a>
+
+          </div>
+          </div>
+           
+            
+    </div>
+    
+
+    
+    
+     <div class="col-md-12 col-xs-12" id="ExistTransactionForm" >
+    <div id="ExistTransactionValidation" >
+        <label style="color: red;" ><bean:message key="ExistTransactionValidationReq"/></label>
+        </div>        
+            <div class="col-md-12 col-xs-12" id="showDataExi" >
+            <div id="innerDataButtonNew" >
+                         
+                         <html:text id="trxNoSelected"  property="trxNoSelected"  styleId="trxNoSelected" onChange="handleChange(this.value)" maxlength="50" value=""  style="width:224px;display: none;"/>
+                         <table id="ownerHistoryTable">
+                            <thead>
+                                                       <tr id="filterRow">
+                                                       <th><input type="text" id="filterlblTrxNo" style="color: black;" onkeyup="applyFilter()"/></th>
+                                                       <th><input type="text" id="filtercityName" style="color: black;" onkeyup="applyFilter()"/></th>
+                                                       <th><input type="text" id="filterlblArea" style="color: black;" onkeyup="applyFilter()"/></th>
+                                                       <th><input type="text" id="filterlblSuburb" style="color: black;" onkeyup="applyFilter()"/></th>
+                                                       <th><input type="text" id="filtergovNum" style="color: black;" onkeyup="applyFilter()"/></th>
+                                                       <th></th>
+                                                        <th></th>
+                                                     </tr>
+
+    
+                           </thead>
+                           <tbody>
+                              <tr>
+                               <td><label  style="font-size: small;"><bean:message key="lblTrxNo"/></label></td>
+                               <td><label  style="font-size: small;"><bean:message key="cityName"/></label></td>
+                               <td><label  style="font-size: small;"><bean:message key="lblArea"/></label></td>
+                               <td><label  style="font-size: small;"><bean:message key="lblSuburb"/></label></td>
+                               <td><label style="font-size: small;"><bean:message key="govNum"/></label></td>
+                               <td><label style="font-size: small;"><bean:message key="displayOnMap"/></label></td>  
+      <!-- Add more headers here -->
+                               <td><label style="font-size: small;"><bean:message key="Select"/></label></td> <!-- Added this line -->
+                             </tr>						   
+    <!-- Rows will be inserted here -->
+                           </tbody>
+                        </table>
+                        <div style="text-align: center;">
+    <button type="button" id="prevPage" onclick="handlePrevPage()"><span><bean:message key="previous"/></span></button>
+    <button type="button" id="nextPage" onclick="handleNextPage()"><span><bean:message key="next"/></span></button>
+  </div>
+                               <a href="#" id="continueReplaceNew" class="button1 bouncy centered-button" style="animation-delay:0.14s" onclick="continueReplaceNew();"><bean:message key="continue"/></a>
+                               <a href="#" id="backInnerReplace" class="button1 bouncy centered-button" style="animation-delay:0.14s" onclick="backInnerReplaceM();"><bean:message key="back"/></a>
+
+
+          </div>
+          </div>
+           
+            
+    </div>
+      <div class="col-md-12 col-xs-12" id="ExistTransactionConfirm" >
+        
+            <div class="col-md-12 col-xs-12" id="showData" >
+            <div class="col-md-6 col-xs-6" style="display: flex; justify-content: center; align-items: center;">
+            <div id="innerDataConfirm" >
+        
+          </div>
+          </div>
+          <div class="col-md-6 col-xs-6" style="display: flex; justify-content: center; align-items: center;">
+            <div id="innerDataConfirm2" >
+        
+          </div>
+          </div>
+          <div class="col-md-12 col-xs-12" style="display: flex; justify-content: center; align-items: center;">
+                 <a href="#" id="submit" class="button1 bouncy centered-button" style="animation-delay:0.14s" onclick="onSubmit();"><bean:message key="landlblSubmit"/></a>
+                 <a href="#" id="backInnerRepConfirm" class="button1 bouncy centered-button" style="animation-delay:0.14s" onclick="backInnerReplaceConfM();"><bean:message key="back"/></a>
+
+</div>
+          </div>
+           
+            
+    </div>
+    
+    <div id="showDataMenu">
+    <div class="col-md-12 col-xs-12" id="showData" >
+            <div id="innerDataButton" >
+                    </br>
+                    </br>
+                    </br>
+                    <div class="sectionForR">
+                     
+                    <!--<a href="#" id="save" class="button1 bouncy" ><bean:message key="save"/></a>-->
+                    <a href="#" id="edit" class="button1 bouncy  centered-button" style="animation-delay:0.07s" onclick="showExistTransaction();"><bean:message key="ExistTransaction"/></a>
+                    </br>
+                    </br>
+                    <a href="#" id="continue" class="button1 bouncy centered-button" style="animation-delay:0.14s" onclick="showGis();"><bean:message key="GIS"/></a>
+                    </div>
+                    
+            </div>
+    </div>	
+    </div>
+    
+    <div class="col-md-12 col-xs-12" id="showGis" >
+            <div id="innerGisData" style="display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100vh;">
+            <!--<iframe id='gisAllocaFrame' src='https://www.sdtps.gov.ae/Html5Viewer/index.html?configBase=https://www.sdtps.gov.ae/Geocortex/Essentials/REST/sites/shounuf/viewers/v3/virtualdirectory/Resources/Config/Default&GrantedID=' width='100%' height='100%' border='0' frameborder='0'></iframe>-->
+            <!--<iframe id='gisAllocaFrame' src='https://www.sdtps.gov.ae/Html5Viewer/index.html?viewer=InstantGrant.InstanseGrantViewer&GrantedID=' width='100%' height='100%' border='0' frameborder='0'></iframe>-->
+			<iframe id='gisAllocaFrame' src='https://www.sdtps.gov.ae/Html5Viewer/index.html?viewer=Land_Replacment.InstanseGrantViewer&GrantedID=' width='100%' height='100%' border='0' frameborder='0'></iframe>
+           
+
+                               <a href="#" id="backGis" class="button1 bouncy centered-button" style="animation-delay:0.14s" onclick="backGisM();"><bean:message key="back"/></a>
+
+       
+            </div>
+    </div>	
+   
+    <div class="col-md-12 col-xs-12" id="gifGis" >
+
+    </div>	            
+    <div class="col-md-12 col-xs-12" id="loadingGis" >
+        <div id="reloadDiv">
+            <a href="#" id="reload" class="button1 bouncy edit" style="animation-delay:0.07s" onclick="location.reload();">إعادة تقديم</a>
+        </div>
+    </div>	        
+</html:form>

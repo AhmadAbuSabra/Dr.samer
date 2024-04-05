@@ -1,0 +1,47 @@
+/** Comments **/
+
+.comment {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 15px 10px 0 10px;
+  background-color: #fff;
+}
+
+.avatar {
+  margin: 5px 0 0;
+  height: 64px;
+  width: 64px;
+  float: left;
+}
+
+.comment-body {
+  position: relative;
+  padding: 0 0 30px;
+  margin: 0 0 0 85px;
+}
+.comment-meta {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 15px;
+}
+.comment-meta-date{
+  font-size: 13px;
+
+  a {
+    color: #788487;
+    opacity: .6;
+  }
+
+  a:hover, a:focus {
+    color: #202877;
+    opacity: 1;
+  }
+
+}
+.children {
+  .comment {
+    border: 0;
+    padding-right: 0;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 25px;
+  }
+}

@@ -1,0 +1,9 @@
+.coming-soon {
+  background-image: $background-gradient-center, url($footer-background-image);
+  margin: 100px 0;
+
+  .ti-email {
+    position: relative;
+    top: 1px;
+  }
+}

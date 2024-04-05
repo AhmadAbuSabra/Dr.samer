@@ -1,0 +1,93 @@
+{
+  "name": "dev-inception",
+  "version": "1.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^1.6.3",
+    "bootstrap": "^5.1.3",
+    "bootstrap-icons": "^1.11.3",
+    "cross-env": "^7.0.3",
+    "formidable": "^3.5.1",
+    "next": "^12.2.0",
+    "next-auth": "^4.24.7",
+    "pg": "^8.11.3",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.4.0",
+    "react-datepicker": "^4.25.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-icons": "^4.12.0",
+    "react-quill": "^2.0.0",
+    "react-select": "^5.8.0",
+    "react-toastify": "^9.1.3",
+    "sass": "^1.53.0",
+    "styled-components": "^6.1.8"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^7.14.3",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@types/formidable": "^3.4.5",
+    "@types/jest": "^28.1.3",
+    "@types/node": "^18.0.0",
+    "@types/pg": "^8.10.9",
+    "@types/react": "^18.0.14",
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
+    "babel-jest": "^28.1.2",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^14.0.2",
+    "eslint-config-next": "^12.2.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-webpack": "^0.13.1",
+    "eslint-plugin-compat": "^4.0.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^25.0.0",
+    "eslint-plugin-jsx-a11y": "^6.6.0",
+    "eslint-plugin-prettier": "^4.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.0",
+    "jest": "^28.1.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "cross-env NODE_ENV=development eslint --cache"
+    ],
+    "{*.json,.{babelrc,eslintrc,prettierrc}}": [
+      "prettier --ignore-path .eslintignore --parser json --write"
+    ],
+    "*.{css,scss}": [
+      "prettier --ignore-path .eslintignore --single-quote --write"
+    ],
+    "*.{html,md,yml}": [
+      "prettier --ignore-path .eslintignore --single-quote --write"
+    ]
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": [
+          ".prettierrc",
+          ".babelrc",
+          ".eslintrc"
+        ],
+        "options": {
+          "parser": "json"
+        }
+      }
+    ],
+    "singleQuote": true,
+    "endOfLine": "auto"
+  }
+}

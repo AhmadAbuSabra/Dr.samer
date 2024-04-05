@@ -1,0 +1,74 @@
+.inner-pages-header {
+
+  height: 80px;
+
+  h1 {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    bottom: 0;
+
+
+
+  }
+
+  .breadcrumb {
+
+    font-size: 1.1rem;
+    font-weight: 600;
+
+    a {
+      color: $white;
+    }
+
+    span {
+      font-size: 0.9rem;
+    }
+
+  }
+
+}
+
+.breadcrumb-wrapper {
+  position: relative;
+  bottom: 30px;
+  margin-bottom: 30px;
+
+  & > div {
+    background-color: $white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    box-shadow: $box-shadow-sm;
+
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: $secondary;
+  }
+
+  span[class^="ti-"] {
+    font-size: 0.8rem;
+  }
+}
+
+.breadcrumb {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  color: $text-muted;
+}
+
+@include media-lg {
+  .inner-pages-header {
+    .breadcrumb {
+      font-size: $h3-font-size;
+      span {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}

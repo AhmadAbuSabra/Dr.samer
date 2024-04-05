@@ -1,0 +1,281 @@
+<c:choose>
+																<c:when test="${trxTypeId==102}">
+																	<a href="/portal/page/portal/DTPS/SitePlanROEService?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+																<c:when test="${trxTypeId==101}">
+																	<a href="/portal/page/portal/DTPS/InitialDesignIndustrialROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==109}">
+																	<a href="/portal/page/portal/DTPS/InitialDesignResTempROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+																<c:when test="${trxTypeId==203}">
+																	<a href="/portal/page/portal/DTPS/OwnershipMapROEService?trxNo=${trxNo}&trxTypeId=203">${trxNo}</a>
+																	<!--<a href="/portal/page/portal/DTPS/OwnershipMapEservice?trxNo=${trxNo}&mode=readOnly"">${trxNo}</a>-->
+																</c:when>
+																<c:when test="${trxTypeId==202}">
+																	<a href="/portal/page/portal/DTPS/OfficialMapROEservice?trxNo=${trxNo}&trxTypeId=202">${trxNo}</a>
+																	<!--<a href="/portal/page/portal/DTPS/OfficialMapEservice?trxNo=${trxNo}&mode=readOnly"">${trxNo}</a>-->
+																</c:when>
+																<c:when test="${trxTypeId==702}">
+																	<a href="/portal/page/portal/DTPS/LeasingOfTemporaryLocation2ROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+																<c:when test="${trxTypeId==703}">
+																	<a href="/portal/page/portal/DTPS/ServicePathROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>																
+																<c:when test="${trxTypeId==204}">
+																	<a href="/portal/page/portal/DTPS/GrantedMapROEservice?trxNo=${trxNo}&trxTypeId=204">${trxNo}</a>
+																	<!--<a href="/portal/page/portal/DTPS/GrantedMapEservice?trxNo=${trxNo}&mode=readOnly"">${trxNo}</a>-->
+																</c:when>
+																<c:when test="${trxTypeId==207}">
+																	<a href="/portal/page/portal/DTPS/DemarcationandLevelingROEService?trxNo=${trxNo}&trxTypeId=207">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==103}">
+																	<a href="/portal/page/portal/DTPS/InitialDesignIndustrialROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==110}">
+																	<a href="/portal/page/portal/DTPS/InitialDesignIndustrialROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==104}">
+																	<a href="/portal/page/portal/DTPS/InitialDesignIndustrialROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==105}">
+																	<a href="/portal/page/portal/DTPS/MyLocationROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==106}">
+																	<a href="/portal/page/portal/DTPS/GrantedLetterROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==107}">
+																	<a href="/portal/page/portal/DTPS/ResidentialToCommercialROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==704}">
+																	<a href="/portal/page/portal/DTPS/LeasingOfTemporaryLocation2ROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==201}">
+																	<a href="/portal/page/portal/DTPS/AnglesDiameterMapROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==205}">
+																	<a href="/portal/page/portal/DTPS/CompensationMapROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==206}">
+																	<a href="/portal/page/portal/DTPS/SplitBldngMapROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==208}">
+																	<a href="/portal/page/portal/DTPS/SoujMapROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==209}">
+																	<a href="/portal/page/portal/DTPS/OwnershipMapOldBldngROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==301}">
+																	<a href="/portal/page/portal/DTPS/MergeMapROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==302}">
+																	<a href="/portal/page/portal/DTPS/SplitMapROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==303}">
+																	<a href="/portal/page/portal/DTPS/CompensationMapROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==304}">
+																	<a href="/portal/page/portal/DTPS/DemolishOldBuildingROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==305}">
+																	<a href="/portal/page/portal/DTPS/DemolishNOCROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==306}">
+																	<a href="/portal/page/portal/DTPS/AddLandROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==307}">
+																	<a href="/portal/page/portal/DTPS/AddSikkaROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==308}">
+																	<a href="/portal/page/portal/DTPS/GrantedMapNewROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==401}">
+																	<a href="/portal/page/portal/DTPS/InterLockROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==402}">
+																	<a href="/portal/page/portal/DTPS/CompensationROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==403}">
+																	<a href="/portal/page/portal/DTPS/AdjustmentROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==404}">
+																	<a href="/portal/page/portal/DTPS/AerialPhotoROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==111}">
+																	<a href="/portal/page/portal/DTPS/ObservationROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==100}">
+																	<a href="/portal/page/portal/DTPS/InitialDesignIndusTemplateRO?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==112}">
+																	<a href="/portal/page/portal/DTPS/InitialDesignResTemplateRO?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+                                                                                                                                <c:when test="${trxTypeId==405}">
+																	<a href="/portal/page/portal/DTPS/PetitionROEservice?trxNo=${trxNo}">${trxNo}</a>
+																</c:when>
+															</c:choose>	
+                                                                                                                        
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function navigate(trxTypeId, trxNo) {
+        var url;
+        switch (trxTypeId) {
+            case 102:
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/siteplaneservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+
+            
+                break;
+            case 101:
+            case 103:
+            case 104:
+            case 110:
+         newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/initialdesignindustrialroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+
+                break;
+            case 109:
+                newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/initialdesignrestemproeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+                break;
+            case 203:
+               newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/ownershipmaproeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+              
+                break;
+            case 202:
+              newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/officialmaproeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+               
+                break;
+            case 702:
+            case 704:
+              newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/leasingoftemporarylocation2roeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+                break;
+            case 703:
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/servicepathroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+           
+                break;
+            case 204:
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/grantedmaproeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+            case 207:
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/demarcationandlevelingroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+              
+                break;
+                    case 103
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/initialdesignindustrialroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 110
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/initialdesignindustrialroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 104
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/initialdesignindustrialroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 105
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/mylocationroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 106
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/grantedletterroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 107
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/residentialtocommercialroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 201
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/anglesdiametermaproeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 205
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/compensationmaproeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 206
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/splitbldngmaproeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 208
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/soujmaproeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 209
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/ownershipmapoldbldngroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 301
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/mergemaproeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 302
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/splitmaproeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 303
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/compensationmaproeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 304
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/demolisholdbuildingroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 305
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/demolishnocroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 306
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/addlandroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 307
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/addsikkaroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 308
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/grantedmapnewroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 401
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/interlockroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 402
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/compensationroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 403
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/adjustmentroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 404
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/aerialphotoroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 111
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/observationroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 100
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/initialdesignindustemplatero?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+                    case 112
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/initialdesignrestemplatero?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+         
+                break;
+            case 405:
+newRow.append('<td>' + '<a href="/webcenter/portal/dtps/pages_secure/petitionroeservice?trxNo=' + item.trxNo + '">' + item.trxNo + '</a>' + '</td>');
+           
+                break;
+            default:
+           newRow.append('<td>' + '<a href="#">' + item.trxNo + '</a>' + '</td>');
+        }
+

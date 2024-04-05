@@ -1,0 +1,51 @@
+footer {
+
+  // background-image: $background-gradient, url($footer-background-image);
+  //background-image: url($footer-background-image);
+  background-color: #353929;
+  background-position: right center;
+  color: $white;
+
+  .nav-link {
+    color: $white;
+    padding-left: 0;
+  }
+
+  .nav-link:hover {
+    color: $primary;
+  }
+
+
+  h6 {
+    display: inline-block;
+    text-transform: uppercase;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid $primary;
+  }
+
+  .social-channels {
+    .nav-link {
+      padding: 0 1rem;
+    }
+
+  }
+  .legal {
+
+    .nav-link {
+      padding: 0;
+    }
+
+    .nav-item {
+      display: flex;
+    }
+
+    .nav-item:after {
+      content: '|';
+      margin: 0 .5rem
+    }
+
+    .nav-item:last-child:after {
+      content: '';
+    }
+  }
+}

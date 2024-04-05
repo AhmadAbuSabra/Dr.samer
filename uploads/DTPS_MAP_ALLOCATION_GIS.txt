@@ -1,0 +1,85 @@
+create or replace FUNCTION                  DTPS_MAP_ALLOCATION_GIS
+(P_TRX_NO VARCHAR2)
+RETURN VARCHAR2 AS
+O_STATUS VARCHAR2(1);
+UPDATED_VAR NUMBER;
+NUM_OF_ROWS_VAR NUMBER;
+TRX_TYPE_VAR NUMBER;
+REPLACED_DATE_VAR VARCHAR2(100);
+CITY_CODE_VAR NUMBER;
+SUBURB_CODE_VAR NUMBER;
+LAND_USAGE_VAR NUMBER;
+AREA_CODE_VAR NUMBER;
+GOV_NO_VAR VARCHAR2(100);
+JSON_STRING VARCHAR2(8000);
+SMS_MSG_VAR VARCHAR2(3000);
+FP_YRL_VAR VARCHAR2(3000);
+BEGIN
+ O_STATUS := '0';
+ CITY_CODE_VAR :='0';
+
+     BEGIN
+          select ar.CITY_CODE,ar.SUBURB_CODE,newar.area_code,newar.gov_num,sysdate,mp.LAND_USAGE_ID,mp.trx_type_id
+            into CITY_CODE_VAR, SUBURB_CODE_VAR, AREA_CODE_VAR, GOV_NO_VAR, REPLACED_DATE_VAR,LAND_USAGE_VAR,TRX_TYPE_VAR
+            from eserviceuser.GRANTED@DTPS_NEW.GEO.SDTPS.GOV.AE  newar
+            left outer join DTPS_ESI_GEOMEDIA_AREAS_L ar on ar.AREA_CODE=newar.area_code
+            left outer join DTPS_ESI_MAP_NEW mp on mp.TRX_NO=newar.id
+            where newar.id=P_TRX_NO and newar.status=1 and mp.active=1;
+    EXCEPTION WHEN NO_DATA_FOUND THEN
+      O_STATUS:='0';
+    END;
+ 
+    BEGIN
+      IF CITY_CODE_VAR<>'0'  THEN
+      BEGIN      
+        UPDATE DTPS_ESI_MAP_PLOT_DET plot
+          SET plot.CITY_CODE=CITY_CODE_VAR, plot.SUBURB_CODE=SUBURB_CODE_VAR, plot.AREA_CODE=AREA_CODE_VAR, plot.GOV_NUM=GOV_NO_VAR
+            , plot.PLOT_AREA='0',NUMBER_ATTRIBUTE1='1',DATE_ATTRIBUTE1=to_date(REPLACED_DATE_VAR),plot.LAND_USAGE_ID=LAND_USAGE_VAR,plot.AREA_CHANGE_FLAG='0'
+          WHERE plot.MSTR_TRX_NO= P_TRX_NO AND
+                plot.active=1;  
+                
+        UPDATED_VAR := SQL%ROWCOUNT; 
+        DBMS_OUTPUT.PUT_LINE ('UPDATED_VAR =' || UPDATED_VAR);
+        EXCEPTION WHEN OTHERS THEN
+          O_STATUS := '0';
+          UPDATED_VAR := -1;
+        END;
+        
+        BEGIN 
+          SELECT COUNT(*) INTO NUM_OF_ROWS_VAR FROM DTPS_ESI_MAP_PLOT_DET plot  WHERE plot.MSTR_TRX_NO= P_TRX_NO AND plot.ACTIVE=1;   
+          EXCEPTION WHEN NO_DATA_FOUND THEN
+            NUM_OF_ROWS_VAR:=0;
+        END;
+        
+        IF UPDATED_VAR<=0 AND NUM_OF_ROWS_VAR=0 THEN
+           --DBMS_OUTPUT.PUT_LINE ('HERE =' || SERIAL_VAR);
+           BEGIN
+
+                DBMS_OUTPUT.PUT_LINE ('REPLACED_DATE_VAR =' || REPLACED_DATE_VAR);
+              INSERT INTO DTPS_ESI_MAP_PLOT_DET(serial,MSTR_TRX_NO,DATE_ATTRIBUTE1,CITY_CODE,SUBURB_CODE,AREA_CODE,GOV_NUM,LAND_USAGE_ID,PLOT_AREA,NUMBER_ATTRIBUTE1,AREA_CHANGE_FLAG,ACTIVE) 
+                                          VALUES(DTPS_ESI_MAP_PLOT_DET_SEQ.nextval,P_TRX_NO,to_date(REPLACED_DATE_VAR),CITY_CODE_VAR,SUBURB_CODE_VAR,AREA_CODE_VAR,GOV_NO_VAR,LAND_USAGE_VAR,0,1,0,1);
+                                       
+              UPDATED_VAR := SQL%ROWCOUNT; 
+            EXCEPTION WHEN OTHERS THEN
+               O_STATUS:='0';
+            END;
+        END IF;
+        
+        IF UPDATED_VAR=1 THEN
+          O_STATUS:='1';       
+        END IF; 
+      END IF;    
+    END;
+  Commit;  
+                   --JSON_STRING :=     DTPS_READY_MAP_TRX(P_TRX_NO);
+                   --Commit;
+ --JSON_STRING :=     DTPS_ARCHIVE_TRX(P_TRX_NO);                   
+                  --SMS_MSG_VAR :='مبروك تم منحك الأرض رقم ... حسب اختياركم وستصلكم الخارطة رقميا قريبا ';
+                   SMS_MSG_VAR :='مبروك تم منحك الأرض رقم '|| GOV_NO_VAR||' حسب اختياركم وستصلكم الخارطة رقميا قريبا';
+                  --FP_YRL_VAR := replace(sys.DTPS_FINAL_PRODUCT_URL(P_TRX_NO),'amp;');
+                  --FP_YRL_VAR :=" ";
+               --   SMS_MSG_VAR :=  SMS_MSG_VAR || FP_YRL_VAR;
+                  JSON_STRING :=DTPS_SEND_SMS(SMS_MSG_VAR,GET_APPLICANT_MOBILE_NO(P_TRX_NO,TRX_TYPE_VAR));
+    
+  RETURN FP_YRL_VAR;
+END DTPS_MAP_ALLOCATION_GIS;

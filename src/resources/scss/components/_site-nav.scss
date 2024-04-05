@@ -1,0 +1,63 @@
+.site-navigation {
+  top: 0px;
+  transition: top 200ms ease-in-out, transform 200ms ease-in-out;
+  transform: scale(1, 1);
+
+
+  .navbar-nav {
+    margin-top: 10px;
+    padding: 10px;
+    margin: 0 auto; 
+  }
+ 
+
+  .nav-item.dropdown:hover {
+    .dropdown-menu{
+      display: block;
+    }
+  }
+
+  .nav-link,
+  .navbar-brand {
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .navbar-brand {
+    text-transform: none;
+    font-size: 1.5rem;
+  }
+
+  .btn-subscribe {
+    background-color: transparent;
+
+    &:hover {
+      background-color: $primary;
+    }
+  }
+
+}
+
+@include media-lg {
+  .site-navigation {
+    .navbar-nav {
+      margin-top: 20px;
+      padding: 0;
+      background-color: transparent;
+      align-self: start;
+    }
+  }
+}
+
+
+.site-navigation-hidden {
+  top: -100px;
+}
+
+.site-navigation-opened {
+  background-image: $background-gradient-header;
+  transform: scale(1.015, 1.015);
+  box-shadow: $box-shadow-sm;
+}
+
+

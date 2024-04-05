@@ -1,0 +1,55 @@
+@use "sass:map";
+
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  direction: rtl;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.no-underline {
+  text-decoration: none !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+
+@import "./components/site-nav";
+@import "./components/home-header";
+@import "./components/page-header";
+@import "./components/pagination";
+@import "./components/home";
+@import "./components/post-list";
+@import "./components/join-newsletter";
+@import "./components/benefits";
+@import "./components/skills";
+@import "./components/techlist";
+@import "./components/comment";
+@import "./components/past-projects";
+@import "./components/archive";
+@import "./components/contacts-form";
+@import "./components/support";
+@import "./components/footer";
+
+
