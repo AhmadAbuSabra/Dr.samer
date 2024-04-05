@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , CSSProperties } from 'react';
 import { Table, Spinner, Button } from 'react-bootstrap';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import { ToastContainer } from 'react-toastify';
