@@ -99,7 +99,7 @@ const AllRequestTable = () => {
         return <Spinner animation="border" />;
     }
 
-    const styles = {
+    const styles: Record<string, CSSProperties> = {
         tableContainer: {
             background: '#fff',
             borderRadius: '10px',
