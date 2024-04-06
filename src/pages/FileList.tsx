@@ -267,7 +267,9 @@ interface IFile {
 }
 
 interface FileListProps {
-  patientId?: string;
+  files: IFile[]; // Make sure this matches the state in your AttachmentManagement component.
+  onRemoveFile: (fileName: string) => void; // Adjust this method to match your implementation
+  patientId?: string; // If you still need patientId, keep it here.
 }
 
 const FileList: React.FC<FileListProps> = ({ patientId }) => {

@@ -10,25 +10,6 @@ const AttachmentContainer = styled.div`
 const AttachmentManagement: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);
 
-  // const onFilesAccepted = (newFiles: File[]) => {
-  //   // Here, you would typically handle the file upload process
-  //   console.log('Accepted files:', newFiles);
-
-  //   const formData = new FormData();
-  //   newFiles.forEach(file => formData.append('files', file));
-
-  //   // Example: POST request to your '/api/upload' endpoint
-  //   fetch('/api/upload', {
-  //     method: 'POST',
-  //     body: formData,
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     console.log(data); // Handle the response
-  //     setFiles(currentFiles => [...currentFiles, ...newFiles]); // Update the state
-  //   })
-  //   .catch(error => console.error('Error:', error));
-  // };
 
   const onFilesAccepted = (newFiles: File[]) => {
     console.log('Accepted files:', newFiles);
