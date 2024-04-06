@@ -51,7 +51,7 @@ const RequestTable = () => {
 
     
 
-    const handleStatusUpdate = async (request: object, newStatus: string) => {
+    const handleStatusUpdate = async (request: Request, newStatus: string) => {
         try {
             const response = await fetch('/api/updateRequestStatus', {
                 method: 'POST',
@@ -75,12 +75,12 @@ const RequestTable = () => {
         }
     };
 
-    const handleApprove = (request: object) => {
+    const handleApprove = (request: Request) => {
         // Implement the approve functionality
         handleStatusUpdate(request, 'معتمد');
     };
 
-    const handleReject = (request: object) => {
+    const handleReject = (request: Request) => {
         // Implement the reject functionality
         handleStatusUpdate(request, 'مرفوض');
     };
@@ -205,7 +205,7 @@ const RequestTable = () => {
                                 <Button variant="outline-primary" size="sm" style={styles.actionButton} onClick={() => handleApprove(request)}>
                                     <AiOutlineCheck /> اعتماد
                                 </Button>
-                                <Button variant="outline-danger" size="sm" style={styles.actionButton} onClick={() => handleReject(request.id)}>
+                                <Button variant="outline-danger" size="sm" style={styles.actionButton} onClick={() => handleReject(request)}>
                                     <AiOutlineClose /> رفض
                                 </Button>
                             </td>
