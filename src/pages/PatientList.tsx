@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Select, { ValueType, StylesConfig } from 'react-select';
+// import Select, { ValueType, StylesConfig } from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 
 type Patient = {
   PATIENT_ID: string;
@@ -15,7 +16,7 @@ type OptionType = {
 
 const PatientList: React.FC = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
-  const [selectedOption, setSelectedOption] = useState<ValueType<OptionType, false>>(null);
+  const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
 
   useEffect(() => {
     fetchPatients();
@@ -34,11 +35,11 @@ const PatientList: React.FC = () => {
     }
   };
 
-  const handleSearchChange = (option: ValueType<OptionType, false>) => {
+  const handleSearchChange = (option: OptionType | null) => {
     setSelectedOption(option);
   };
 
-  const options = patients.map(patient => ({
+  const options: OptionType[] = patients.map(patient => ({
     value: patient.PATIENT_ID,
     label: `${patient.NAME} - ${patient.PATIENT_ID}`
   }));
