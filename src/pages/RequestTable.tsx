@@ -99,7 +99,7 @@ const RequestTable = () => {
         return <Spinner animation="border" />;
     }
 
-    const styles = {
+    const styles: { [key: string]: React.CSSProperties } = {
         tableContainer: {
             background: '#fff',
             borderRadius: '10px',
