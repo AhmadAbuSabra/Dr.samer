@@ -15,6 +15,29 @@ interface FileListProps {
   key: number;
 }
 
+interface FormData {
+  patientId: string;
+  dateOfBirth: string;
+  gender: string;
+  address: string;
+  phoneNumber: string;
+  medicalHistory: string;
+  allergies: string;
+  bloodType: string;
+  fkUserId: number;
+  name: string;
+  age: number;
+  painRate: number;
+  email: string;
+  patientDescription: string;
+  pathogenDescription: string;
+  pain_increase: string;
+  pain_decrease: string;
+  pain_medication: string;
+  pain_surgery: string;
+  physical_therapy: string;
+}
+
 const PatientForm: React.FC<{ patientId?: string }> = ({ patientId }) => {
  
   const [files, setFiles] = useState<File[]>([]);
@@ -182,36 +205,6 @@ console.log(type); // This will output the type of data.DATEOFBIRTH
     }
   };
 
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-  //   const { name, value } = event.target;
-  //   setFormData(prev => ({ ...prev, [name]: value }));
-  // };
-  //   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-  //   const { name, value } = event.target;
-  //   setFormData(prev => ({
-  //     ...prev,
-  //     [name]: name === 'painRate' ? parseInt(value, 10) : value
-  //   }));
-  // };
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-  //   const { name, value } = event.target;
-  
-  //   if (event.target instanceof HTMLInputElement && event.target.type === 'checkbox') {
-  //     // Now TypeScript knows this is an input element with a 'checked' property
-  //     const checked = event.target.checked;
-  //     if (name === 'painRate') {
-  //       setFormData(prev => ({
-  //         ...prev,
-  //         [name]: checked ? parseInt(value, 10) : prev[name]
-  //       }));
-  //     }
-  //   } else {
-  //     setFormData(prev => ({
-  //       ...prev,
-  //       [name]: name === 'painRate' ? parseInt(value, 10) : value
-  //     }));
-  //   }
-  // };
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -221,7 +214,9 @@ console.log(type); // This will output the type of data.DATEOFBIRTH
       const checked = event.target.checked;
       setFormData(prev => ({
         ...prev,
-        [name]: checked ? parseInt(value, 10) : prev[name]
+        // [name]: checked ? parseInt(value, 10) : prev[name]
+        [name as keyof FormData]: checked ? parseInt(value, 10) : prev[name as keyof FormData]
+
       }));
     } else if (name === 'dateOfBirth') {
       // Special handling for dateOfBirth to calculate age
@@ -235,7 +230,9 @@ console.log(type); // This will output the type of data.DATEOFBIRTH
       // Handling all other inputs
       setFormData(prev => ({
         ...prev,
-        [name]: name === 'painRate' ? parseInt(value, 10) : value
+        // [name]: name === 'painRate' ? parseInt(value, 10) : value
+        [name as keyof FormData]: name === 'painRate' ? parseInt(value, 10) : value
+
       }));
     }
 };
