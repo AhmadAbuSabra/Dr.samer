@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Select, { ValueType, StylesConfig } from 'react-select';
+import Select, { StylesConfig } from 'react-select'; // Removed ValueType
 import { useRouter } from 'next/router';
 
 type Patient = {
@@ -26,7 +26,7 @@ type Appointment = {
 
 const PatientPayment: React.FC = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
-  const [selectedOption, setSelectedOption] = useState<ValueType<OptionType, false>>(null);
+  const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const router = useRouter();
 
@@ -52,7 +52,7 @@ const PatientPayment: React.FC = () => {
     setAppointments(data);
   };
 
-  const handleSearchChange = (option: ValueType<OptionType, false>) => {
+  const handleSearchChange = (option: OptionType | null) => {
     setSelectedOption(option);
     if (option) {
       fetchAppointments(option.value);
