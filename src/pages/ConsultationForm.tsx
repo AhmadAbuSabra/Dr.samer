@@ -435,7 +435,12 @@ async function addPaymentMasterRecord(data: PaymentMasterFormData): Promise<void
 
        <FileListCard>
         <h3>المرفقات</h3>
-        <FileList files={files} onRemoveFile={onRemoveFile} patientId={patientId} />
+        {/* <FileList files={files} onRemoveFile={onRemoveFile} patientId={patientId} /> */}
+        <FileList
+  files={files.map(file => ({ file_name: file.name /*, other properties */ }))}
+  onRemoveFile={fileName => onRemoveFile(new File([], fileName))}
+/>
+
       </FileListCard>
       <FormContainer>
       <form onSubmit={handleSubmit} style={{
