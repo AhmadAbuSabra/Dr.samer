@@ -548,7 +548,11 @@ const calculateAge = (dob: string): number => {
 
 <AttachmentContainer>
       <FileUpload onFilesAccepted={onFilesAccepted} />
-      <FileList key={refreshFileListKey} files={files} onRemoveFile={onRemoveFile} patientId={patientId} />
+      {/* <FileList key={refreshFileListKey} files={files} onRemoveFile={onRemoveFile} patientId={patientId} /> */}
+      <FileList
+  files={files.map(file => ({ file_name: file.name /*, other properties */ }))}
+  onRemoveFile={fileName => onRemoveFile(new File([], fileName))}
+/>
     </AttachmentContainer>
 
 
