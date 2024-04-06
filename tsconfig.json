@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": false,
     "strict": false, // Instead of true
     "noImplicitAny": false, // Instead of true
     "strictNullChecks": false, // Instead of true
