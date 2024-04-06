@@ -52,7 +52,7 @@ const VideoList: React.FC = () => {
   );
 };
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
   grid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
