@@ -68,10 +68,10 @@ const styles: { [key: string]: React.CSSProperties } = {
     overflow: 'hidden',
     boxShadow: '0 6px 12px rgba(0,0,0,0.1)',
     transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-    ':hover': {
-      transform: 'scale(1.03)',
-      boxShadow: '0 12px 24px rgba(0,0,0,0.2)',
-    },
+    // ':hover': {
+    //   transform: 'scale(1.03)',
+    //   boxShadow: '0 12px 24px rgba(0,0,0,0.2)',
+    // },
     backgroundColor: '#ffffff', // White background for each card
   },
   iframe: {
