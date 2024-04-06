@@ -206,7 +206,7 @@ console.log(type); // This will output the type of data.DATEOFBIRTH
   };
 
   
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
 
     if (event.target instanceof HTMLInputElement && event.target.type === 'checkbox') {
