@@ -238,7 +238,7 @@ console.log(type); // This will output the type of data.DATEOFBIRTH
 };
 
   // Inline CSS styles
-  const styles = {
+  const styles: { [key: string]: React.CSSProperties } = {
     formContainer: {
       maxWidth: '700px',
       margin: '2rem auto',
