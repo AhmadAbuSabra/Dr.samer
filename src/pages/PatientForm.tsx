@@ -237,6 +237,8 @@ console.log(type); // This will output the type of data.DATEOFBIRTH
     }
 };
 
+
+
   // Inline CSS styles
   const styles: { [key: string]: React.CSSProperties } = {
     formContainer: {
@@ -291,19 +293,19 @@ console.log(type); // This will output the type of data.DATEOFBIRTH
       borderColor: '#28a745', // Change this to your desired color
     boxShadow: '0 0 0 2px rgba(40, 167, 69, 0.25)', 
     },
-     slider: (value: number) => ({
-      appearance: 'none',
-      width: '100%',
-      height: '15px',
-      borderRadius: '5px',
-      background: getSliderBackground(value),
-      outline: 'none',
-      opacity: '0.7',
-      transition: 'opacity 0.2s',
-      ':hover': {
-        opacity: '1',
-      },
-    }),
+    //  slider: (value: number) => ({
+    //   appearance: 'none',
+    //   width: '100%',
+    //   height: '15px',
+    //   borderRadius: '5px',
+    //   background: getSliderBackground(value),
+    //   outline: 'none',
+    //   opacity: '0.7',
+    //   transition: 'opacity 0.2s',
+    //   ':hover': {
+    //     opacity: '1',
+    //   },
+    // }),
     valueDisplay: (value: number) => ({
       textAlign: 'center',
       marginTop: '10px',
