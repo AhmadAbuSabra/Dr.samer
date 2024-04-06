@@ -33,6 +33,7 @@ export interface VideoItem {
     };
     channelTitle: string;
     liveBroadcastContent: string;
+    tags?: string[]; // Add this line for the tags
   };
 }
 
