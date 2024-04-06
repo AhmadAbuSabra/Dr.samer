@@ -41,7 +41,7 @@ const DoctorProcedureCheckbox = ({
     setSelectedProcedures(newSelectedProcedures);
   };
   // Inline styles for improved aesthetics
-  const styles = {
+  const styles: { [key: string]: React.CSSProperties } = {
     container: {
       display: 'flex',
       flexDirection: 'column',
