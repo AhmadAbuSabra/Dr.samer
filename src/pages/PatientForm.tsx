@@ -306,15 +306,15 @@ console.log(type); // This will output the type of data.DATEOFBIRTH
     //     opacity: '1',
     //   },
     // }),
-    valueDisplay: (value: number) => ({
-      textAlign: 'center',
-      marginTop: '10px',
-      padding: '5px',
-      borderRadius: '5px',
-      color: 'white',
-      fontWeight: 'bold',
-      backgroundColor: getColor(value),
-    }),
+    // valueDisplay: (value: number) => ({
+    //   textAlign: 'center',
+    //   marginTop: '10px',
+    //   padding: '5px',
+    //   borderRadius: '5px',
+    //   color: 'white',
+    //   fontWeight: 'bold',
+    //   backgroundColor: getColor(value),
+    // }),
 
     checkboxContainer: {
       display: 'flex',
