@@ -10,7 +10,7 @@ const LegPainInfoPage: React.FC = () => {
   // State to handle hover effect
   const [isButtonHovered, setIsButtonHovered] = useState(false);
 
-  const styles = {
+  const styles: { [key: string]: React.CSSProperties } = {
     container: {
       fontFamily: 'Arial, sans-serif',
       lineHeight: '1.6',
