@@ -61,7 +61,11 @@ const AttachmentManagement: React.FC = () => {
   return (
     <AttachmentContainer>
       <FileUpload onFilesAccepted={onFilesAccepted} />
-      <FileList files={files} onRemoveFile={onRemoveFile} />
+      {/* <FileList files={files} onRemoveFile={onRemoveFile} /> */}
+      <FileList
+  files={files.map(file => ({ file_name: file.name /*, other properties */ }))}
+  onRemoveFile={fileName => onRemoveFile(new File([], fileName))}
+/>
     </AttachmentContainer>
   );
 };
