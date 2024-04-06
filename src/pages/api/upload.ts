@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import { query } from '../../../utilities/db'; // Adjust the import path as necessary
+import { IncomingForm as FormidableIncomingForm } from 'formidable';
 
 // Define custom types for formidable directly in the same file
 declare module 'formidable' {
@@ -27,13 +28,13 @@ declare module 'formidable' {
     [key: string]: string | string[];
   }
 
-  export class IncomingForm {
-    public uploadDir: string;
-    public keepExtensions: boolean;
-    public multiples: boolean;
-    public parse(req: any, callback: (err: Error | null, fields: Fields, files: Files) => void): void;
-    constructor(options?: Partial<IncomingFormOptions>);
-  }
+  // export class IncomingForm {
+  //   public uploadDir: string;
+  //   public keepExtensions: boolean;
+  //   public multiples: boolean;
+  //   public parse(req: any, callback: (err: Error | null, fields: Fields, files: Files) => void): void;
+  //   constructor(options?: Partial<IncomingFormOptions>);
+  // }
 
   export interface IncomingFormOptions {
     uploadDir?: string;
